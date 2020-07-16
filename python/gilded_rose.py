@@ -22,11 +22,9 @@ class GildedRose(object):
                     item.increase_one_quality()
                     if item.name == qualifiedItems[1]:
                         if item.sell_in < 11:
-                            if item.quality < 50:
-                                item.increase_one_quality()
-                        if item.sell_in < 6:
-                            if item.quality < 50:
-                                item.increase_one_quality()
+                            item.increase_one_quality()
+                        elif item.sell_in < 6:
+                            item.increase_one_quality()
 
             if item.name != qualifiedItems[2]:
                 item.decrease_one_sell_in()
