@@ -13,17 +13,14 @@ class GildedRose(object):
 
     def update_quality(self):
         for item in self.items:
-            if item.name == qualifiedItems[2]:
-                continue
-
-            item.decrease_one_sell_in()
-
             if item.name == qualifiedItems[0]:
+                item.decrease_one_sell_in()
                 if item.quality < 50:
                     item.increase_one_quality()
                     if item.sell_in < 0:
                         item.increase_one_quality()
             elif item.name == qualifiedItems[1]:
+                item.decrease_one_sell_in()
                 if item.quality < 50:
                     if item.sell_in < 10:
                         item.increase_one_quality()
@@ -32,7 +29,10 @@ class GildedRose(object):
 
                 if item.sell_in < 0:
                     item.clear_quality()
+            elif item.name == qualifiedItems[2]:
+                continue
             else:
+                item.decrease_one_sell_in()
                 if item.quality > 0:
                     item.decrease_one_quality()
                     if item.sell_in < 0:
