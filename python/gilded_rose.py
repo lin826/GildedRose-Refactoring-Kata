@@ -10,31 +10,30 @@ class GildedRose(object):
             if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert":
                 if item.quality > 0:
                     if item.name != "Sulfuras, Hand of Ragnaros":
-                        item.quality = item.quality - 1
+                        item.decrease_one_quality()
             else:
                 if item.quality < 50:
-                    item.quality = item.quality + 1
+                    item.increase_one_quality()
                     if item.name == "Backstage passes to a TAFKAL80ETC concert":
                         if item.sell_in < 11:
                             if item.quality < 50:
-                                item.quality = item.quality + 1
+                                item.increase_one_quality()
                         if item.sell_in < 6:
                             if item.quality < 50:
-                                item.quality = item.quality + 1
+                                item.increase_one_quality()
             if item.name != "Sulfuras, Hand of Ragnaros":
-                item.sell_in = item.sell_in - 1
+                item.decrease_one_sell_in()
             if item.sell_in < 0:
                 if item.name != "Aged Brie":
                     if item.name != "Backstage passes to a TAFKAL80ETC concert":
                         if item.quality > 0:
                             if item.name != "Sulfuras, Hand of Ragnaros":
-                                item.quality = item.quality - 1
+                                item.decrease_one_quality()
                     else:
-                        item.quality = item.quality - item.quality
+                        item.clear_quality()
                 else:
                     if item.quality < 50:
-                        item.quality = item.quality + 1
-
+                        item.increase_one_quality()
 
 class Item:
     def __init__(self, name, sell_in, quality):
@@ -44,3 +43,15 @@ class Item:
 
     def __repr__(self):
         return "%s, %s, %s" % (self.name, self.sell_in, self.quality)
+
+    def increase_one_quality(self):
+        self.quality = self.quality + 1
+    
+    def decrease_one_quality(self):
+        self.quality = self.quality - 1
+
+    def clear_quality(self):
+        self.quality = self.quality - self.quality
+
+    def decrease_one_sell_in(self):
+        self.sell_in = self.sell_in - 1
