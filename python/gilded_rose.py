@@ -59,7 +59,7 @@ class Item:
         self.quality = self.quality - 1
 
     def clear_quality(self):
-        self.quality = self.quality - self.quality
+        self.quality = 0
 
     def decrease_one_sell_in(self):
         self.sell_in = self.sell_in - 1
