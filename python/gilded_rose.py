@@ -13,33 +13,35 @@ class GildedRose(object):
 
     def update_quality(self):
         for item in self.items:
-            if item.name != qualifiedItems[0] and item.name != qualifiedItems[1]:
-                if item.quality > 0:
-                    if item.name != qualifiedItems[2]:
-                        item.decrease_one_quality()
-            else:
+            if item.name == qualifiedItems[2]:
+                continue
+
+            if item.name == qualifiedItems[0]:
                 if item.quality < 50:
                     item.increase_one_quality()
-                    if item.name == qualifiedItems[1]:
-                        if item.sell_in < 11:
-                            item.increase_one_quality()
-                        elif item.sell_in < 6:
-                            item.increase_one_quality()
+            elif item.name == qualifiedItems[1]:
+                if item.quality < 50:
+                    if item.sell_in < 11:
+                        item.increase_one_quality()
+                    elif item.sell_in < 6:
+                        item.increase_one_quality()
+            else:
+                if item.quality > 0:
+                    item.decrease_one_quality()
 
-            if item.name != qualifiedItems[2]:
-                item.decrease_one_sell_in()
+            item.decrease_one_sell_in()
 
-            if item.sell_in < 0:
-                if item.name != qualifiedItems[0]:
-                    if item.name != qualifiedItems[1]:
-                        if item.quality > 0:
-                            if item.name != qualifiedItems[2]:
-                                item.decrease_one_quality()
-                    else:
-                        item.clear_quality()
-                else:
+            if item.name == qualifiedItems[0]:
+                if item.sell_in < 0:
                     if item.quality < 50:
                         item.increase_one_quality()
+            elif item.name == qualifiedItems[1]:
+                if item.sell_in < 0:
+                    item.clear_quality()
+            else:
+                if item.sell_in < 0:
+                    if item.quality > 0:
+                        item.decrease_one_quality()
 
 class Item:
     def __init__(self, name, sell_in, quality):
